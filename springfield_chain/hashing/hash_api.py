@@ -4,7 +4,7 @@ import json
 ENCODING = "utf-8"
 
 def hashBlock(block):
-    block_as_json = json.dumps(block, separators=(",", ":"), sort_keys=True)
+    block_as_json = json.dumps(block, separators=(",", ":"), sort_keys=False)
     hash = sha256(block_as_json.encode(ENCODING)).hexdigest()
     return hash
 
