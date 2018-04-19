@@ -11,14 +11,14 @@ class Block:
     """
     represents a single block of the chain
     """
-    def __init__(self, index, previousBlockHash, timestamp = None):
+    def __init__(self, index, previousBlockHash, timestamp = None, proof = 0):
         if timestamp is None:
             timestamp = int(time.time())
         self.index = index
         self.previousBlockHash = previousBlockHash
         self.timestamp = timestamp
         self.transactions = []
-        self.proof = 0
+        self.proof = proof
 
     def set_proof(self, proof):
         self.proof = proof
@@ -36,5 +36,11 @@ class Block:
         return dict
 
     def toJSON(self):
-        return json.dumps(self, default=lambda o: o.__dict__,
-            sort_keys=True, indent=4)
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+
+def block_from_dict(data):
+    block = Block(data["index"], data["previousBlockHash"], data["timestamp"], data["proof"])
+    for tx in data["transactions"]:
+        block.add_transaction(tx["id"], tx["timestamp"], tx["payload"])
+    return block
+
