@@ -12,10 +12,9 @@ def get_node_information():
         return '{"nodeId": "' + node.uuid + '", "currentBlockHeight": ' + str(len(node.chain)) +'}'
 
 
-#FIXME returns wrong data structure
 @app.route('/blocks')
 def get_blocks():
-        return json.dumps(node.chain)
+        return '{"blocks":' + json.dumps(node.chain) + '}'
 
 #FIXME implement
 @app.route('/mine')
