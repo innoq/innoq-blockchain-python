@@ -2,6 +2,9 @@ from flask import Flask
 
 import json
 from springfield_chain.web_api.node import Node
+from springfield_chain.block.blocks import Block
+from springfield_chain.hashing import hash_api
+
 
 app = Flask(__name__)
 
@@ -19,7 +22,12 @@ def get_blocks():
 #FIXME implement
 @app.route('/mine')
 def get_mine():
-        return "dummy miner"
+        last_block = node.chain[-1]
+        last_hash = hash_api.hashBlock(last_block)
+        print (str(last_block))
+        new_block = Block(last_block['index'] + 1, last_hash)
+
+        return new_block.toJSON()
 
 # FIXME implement
 @app.route("/nodes/register", methods=["POST"])
