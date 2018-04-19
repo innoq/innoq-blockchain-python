@@ -1,4 +1,6 @@
 from flask import Flask
+from springfield_chain.block import blocks
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -8,7 +10,7 @@ def get_node_information():
 
 @app.route('/blocks')
 def get_blocks():
-        return '"Hello, blocks!'
+        return blocks.dummyBlocks()
 
 @app.route('/mine')
 def get_mine():
