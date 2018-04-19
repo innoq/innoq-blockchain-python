@@ -5,7 +5,7 @@ from springfield_chain.web_api.node import Node
 
 app = Flask(__name__)
 
-node = Node()
+node = Node('springfield_chain/block/genesis.json')
 
 @app.route('/')
 def get_node_information():
