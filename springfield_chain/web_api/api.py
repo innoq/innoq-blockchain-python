@@ -1,6 +1,5 @@
 from flask import Flask
-from springfield_chain.block.chain import BlockChain
-import uuid
+
 import json
 from springfield_chain.web_api.node import Node
 
