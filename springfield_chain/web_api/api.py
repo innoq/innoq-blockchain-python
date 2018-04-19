@@ -4,9 +4,11 @@ import uuid
 
 app = Flask(__name__)
 
+UUID = str(uuid.uuid1())
+
 @app.route('/')
 def get_node_information():
-        return '{"nodeId": "' + str(uuid.uuid1()) + '", "currentBlockHeight": 0}'
+        return '{"nodeId": "' + UUID + '", "currentBlockHeight": 0}'
 
 
 @app.route('/blocks')
