@@ -9,13 +9,11 @@ def check_block(block_dict):
     h = hash_api.hash_block(block)
     return is_proven_hash(h)
 
-def mine_block(block_dict, proof=0, n=10000000):
-    block = block_from_dict(block_dict)
+def mine_block(block, proof=0, n=10000000):
     for p in range(proof, proof + n):
         h = hash_api.hash_block_with_proof(block, p)
         if is_proven_hash(h):
-            block.set_proof(p)
-            return block
+            return p
 
 def mine_block_parallel(block):
     mine_block(block)

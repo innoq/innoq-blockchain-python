@@ -26,9 +26,9 @@ def get_mine():
         last_block = node.chain[-1]
         last_hash = hash_api.hash_block(last_block)
         print (str(last_block))
-        new_block = Block(last_block['index'] + 1, last_hash)
-        #proof = mining.mine_block(new_block)
-        #new_block.set_proof(proof)
+        new_block = Block(last_block.index + 1, last_hash)
+        proof = mining.mine_block(new_block)
+        new_block.set_proof(proof)
         node.chain.append(new_block)
         time_end = time.clock()
         return '{"message": "Mined a new block in ' + str(time_end-time_start) + 's", "block":' + new_block.toJSON() + '}'
