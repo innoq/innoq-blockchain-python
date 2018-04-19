@@ -2,22 +2,21 @@ from flask import Flask
 from springfield_chain.block.chain import BlockChain
 import uuid
 import json
+from springfield_chain.web_api.node import Node
 
 app = Flask(__name__)
 
-chain = BlockChain()
-
-UUID = str(uuid.uuid1())
+node = Node()
 
 @app.route('/')
 def get_node_information():
-        return '{"nodeId": "' + UUID + '", "currentBlockHeight": ' + str(len(chain)) +'}'
+        return '{"nodeId": "' + node.uuid + '", "currentBlockHeight": ' + str(len(node.chain)) +'}'
 
 
 #FIXME returns wrong data structure
 @app.route('/blocks')
 def get_blocks():
-        return json.dumps(chain.__dict__)
+        return json.dumps(node.chain)
 
 #FIXME implement
 @app.route('/mine')
