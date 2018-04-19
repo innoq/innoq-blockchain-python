@@ -28,7 +28,7 @@ class BlockChain(list):
             return False
 
     def check_new_block_validity(self, new_block):
-        if self.last_hash != new_block["previousBlockHash"]:
+        if self.last_hash != new_block.previousBlockHash:
             print("last hash mismatch")
             return False
         elif check_block(new_block):
