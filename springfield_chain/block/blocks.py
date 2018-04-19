@@ -38,7 +38,10 @@ class Block:
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
+
 def block_from_dict(data):
+    if type(data) == Block:
+        return data
     block = Block(data["index"], data["previousBlockHash"], data["timestamp"], data["proof"])
     for tx in data["transactions"]:
         block.add_transaction(tx["id"], tx["timestamp"], tx["payload"])
