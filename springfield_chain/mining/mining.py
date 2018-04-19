@@ -1,18 +1,20 @@
 from springfield_chain.hashing import hash_api
 
-def isProvenHash(hash):
+def is_proven_hash(hash):
     return hash.startswith('0000')
 
-def checkBlock(block):
+def check_block(block):
     h = hash_api.hashBlock(block)
-    return isProvenHash(h)
+    return is_proven_hash(h)
 
-def mineBlock(block):
-    p = 0
-    while (True):
+def mine_block(block, proof=0, n=10000000):
+    while (p in range(proof, proof + n)):
         h = hash_api.hashBlockWithProof(block, p)
-        if isProvenHash(h):
+        if is_proven_hash(h):
             block.set_proof(p)
             return block
         else:
-            p = p + 1
+            p += 1
+
+def mine_block_parallel(block):
+    mine_block(block)
