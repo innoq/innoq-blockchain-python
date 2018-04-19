@@ -1,6 +1,6 @@
 import json
 
-from springfield_chain.block.blocks import Block, block_from_dict
+from springfield_chain.block.blocks import block_from_dict
 from springfield_chain.hashing import hash_api
 
 with open('../block/genesis.json') as json_data:
