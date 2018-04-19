@@ -1,5 +1,6 @@
 from springfield_chain.block.blocks import block_from_dict
 from springfield_chain.hashing import hash_api
+import subprocess
 
 def is_proven_hash(hash):
     return hash.startswith('0000')
@@ -15,5 +16,6 @@ def mine_block(block, proof=0, n=10000000):
         if is_proven_hash(h):
             return p
 
-def mine_block_parallel(block):
-    mine_block(block)
+#def mine_block_parallel(block):
+ #   subprocess
+  #  mine_block(block)
