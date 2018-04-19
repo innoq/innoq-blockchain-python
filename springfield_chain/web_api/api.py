@@ -24,7 +24,7 @@ def get_blocks():
 def get_mine():
         time_start = time.clock()
         last_block = node.chain[-1]
-        last_hash = hash_api.hashBlock(last_block)
+        last_hash = hash_api.hash_block(last_block)
         print (str(last_block))
         new_block = Block(last_block['index'] + 1, last_hash)
         #proof = mining.mine_block(new_block)
