@@ -17,7 +17,7 @@ def get_node_information():
 
 @app.route('/blocks')
 def get_blocks():
-        return '{"blocks":' + json.dumps(node.chain) + '}'
+        return '{"blocks":' + node.chain.toJSON() + '}'
 
 
 @app.route('/mine')

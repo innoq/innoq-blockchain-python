@@ -12,3 +12,6 @@ class BlockChain(list):
     def append(self, new_block):
         # TODO check integrity here?
         super().append(new_block)
+
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
