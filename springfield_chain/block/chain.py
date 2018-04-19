@@ -1,3 +1,4 @@
+import json
 
 class BlockChain:
     """
@@ -5,8 +6,10 @@ class BlockChain:
     needs at least a genesis block
     """
 
-    def __init__(self, genesis):
-        self.chain = [genesis,]
+    def __init__(self):
+        with open('springfield_chain/block/genesis.json') as in_file:
+            genesis = json.loads(in_file.read())
+            self.chain = [genesis,]
 
     def __len__(self):
         return len(self.chain)

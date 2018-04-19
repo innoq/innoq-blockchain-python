@@ -13,7 +13,3 @@ def hashBlock(block):
 def hashBlockWithProof(block, proof):
     block["proof"] = proof
     return hashBlock(block)
-
-
-def dummyBlocks():
-    return "dummyBlocks"
