@@ -22,16 +22,17 @@ class BlockChain(list):
         """
         if self.check_new_block_validity(new_block):
             super().append(new_block)
+            print("new block appended")
             self.last_hash = hash_block(new_block) # TODO avoid computing hash twice
             return True
         else:
             return False
 
     def check_new_block_validity(self, new_block):
-        if self.last_hash != new_block["previousBlockHash"]:
+        if self.last_hash != new_block.previousBlockHash:
             print("last hash mismatch")
             return False
-        elif check_block(new_block):
+        elif not check_block(new_block):
             print("invalid new block")
             return False
         else:
