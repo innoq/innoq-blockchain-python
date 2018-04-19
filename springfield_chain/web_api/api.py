@@ -19,15 +19,16 @@ def get_node_information():
 def get_blocks():
         return '{"blocks":' + json.dumps(node.chain) + '}'
 
-#FIXME implement
+
 @app.route('/mine')
 def get_mine():
         last_block = node.chain[-1]
         last_hash = hash_api.hashBlock(last_block)
         print (str(last_block))
         new_block = Block(last_block['index'] + 1, last_hash)
-
-        return new_block.toJSON()
+        # FIXME generate and add proof
+        node.chain.append(new_block)
+        return '{"message": "Mined a new block in xx.xxx s", "block":' + new_block.toJSON() + '}'
 
 # FIXME implement
 @app.route("/nodes/register", methods=["POST"])
