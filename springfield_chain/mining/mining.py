@@ -27,14 +27,13 @@ def mine_proof(block, proof=0, n=10000000):
             p += 1
     return None
 
-def mine_block(last_block, tx_list):
-    """  """
+def mine_block(last_block, tx_candidate_list):
+    """ takes up to n tx from the candidate list """
     last_hash = hash_api.hash_block(last_block)
     print(str(last_block))
     new_block = Block(last_block.index + 1, last_hash)
-    for tx in tx_list[:5]:
-        new_block.add_transaction_singleparams()
-
+    for tx in tx_candidate_list[:5]:
+        new_block.add_transaction(tx)
     proof = mine_proof(new_block)
     new_block.set_proof(proof)
     return new_block

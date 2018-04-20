@@ -28,8 +28,8 @@ def get_blocks():
 def get_mine():
         time_start = time.clock()
         last_block = node.chain[-1]
-        new_block = mining.mine_block(last_block)
-        node.chain.append(new_block)
+        new_block = mining.mine_block(last_block, node.candidate_txs)
+        node.append_block(new_block)
         time_end = time.clock()
         return '{"message": "Mined a new block in ' + str(time_end-time_start) + 's", "block":' + new_block.toJSON() + '}'
 

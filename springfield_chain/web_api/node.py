@@ -39,3 +39,8 @@ class Node:
                 trans = trx.copy()
                 trans['confirmed'] = True
         return trans
+
+    def append_block(self, block):
+        self.chain.append(block)
+        for tx in block.transactions:
+            self.confirm_transaction(tx['id'])
