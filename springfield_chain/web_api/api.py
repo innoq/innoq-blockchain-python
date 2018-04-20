@@ -12,6 +12,7 @@ app = Flask(__name__)
 
 node = Node('springfield_chain/block/genesis.json')
 
+
 @app.route('/')
 def get_node_information():
         return '{"nodeId": "' + node.uuid + '", "currentBlockHeight": ' + str(len(node.chain)) +'}'
@@ -35,13 +36,10 @@ def get_mine():
         time_end = time.clock()
         return '{"message": "Mined a new block in ' + str(time_end-time_start) + 's", "block":' + new_block.toJSON() + '}'
 
-# @app.route('/transactions', methods=["POST"])
-# def post_transaction():
-#         print(request.form.get("payload"))
-#         #transaction = Transaction(request.data["payload"])
-#         #print(transaction.payload + " added to transactions")
-#         #node.append_transaction(transaction)
-#         return '{"message": "Received new}'
+
+@app.route('/transactions/<id>')
+def get_transaction_by_id(id):
+        return '{ "id": "' + id + '","payload": "Arnulf Beckenbauer","timestamp": 1523525426,"confirmed": true}'
 
 
 # FIXME implement
