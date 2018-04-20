@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, request
 
 import time
@@ -45,8 +47,8 @@ def get_transaction_by_id(id):
 @app.route('/transactions', methods=["POST"])
 def post_transaction():
         request_data = request.get_json()
-        print(request_data['payload'])
-        transaction = Transaction(request_data['payload'])
+        payload = request_data['payload']
+        transaction = Transaction(json.dumps(payload, separators=(",", ":")))
         node.append_transaction(transaction)
         return '{"message": "Received new transaction ' + str(transaction.id) + ' with payload ' + transaction.payload + \
                ' at ' + str(transaction.timestamp) + '"}'

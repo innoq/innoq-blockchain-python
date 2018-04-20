@@ -3,6 +3,7 @@ import json
 from springfield_chain.block.chain import BlockChain
 from springfield_chain.block.blocks import block_from_dict
 
+
 class Node:
 
     def __init__(self, persistence_file=None):
@@ -16,11 +17,11 @@ class Node:
     def append_transaction(self, transaction):
         self.transactions.append(transaction)
 
-
-    def get_transaction_by_id(self,id):
+    def get_transaction_by_id(self, id, trans=None):
         for trx in self.transactions:
-            if trx.id==id:
-                return trx
+            if trx.id == id:
+                print("woohooo")
+                trans = trx
         # FIXME
-        return '{ "id": "' + id + '","payload": "Arnulf Beckenbauer","timestamp": 1523525426,"confirmed": true}'
-
+        return '{ "id": "' + str(trans.id) + '","payload": "' + str(trans.payload) + ',"timestamp": ' \
+               + str(trans.timestamp) + ',"confirmed": true}'
