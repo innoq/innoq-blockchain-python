@@ -14,7 +14,7 @@ def check_block(block):
     h = hash_api.hash_block(block)
     return is_proven_hash(h)
 
-def mine_block(block, proof=0, n=10000000):
+def mine_proof(block, proof=0, n=10000000):
     if not block.is_valid():
         raise ValueError('this block is not valid')
     for p in range(proof, proof + n):
@@ -26,7 +26,6 @@ def mine_block(block, proof=0, n=10000000):
     return None
 
 def mine_block (last_block):
-
     last_hash = hash_api.hash_block(last_block)
     print(str(last_block))
     new_block = Block(last_block.index + 1, last_hash)
