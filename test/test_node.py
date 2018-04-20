@@ -9,7 +9,7 @@ def test_get_transaction_by_id():
     payload = 'blablabla'
     transaction = Transaction(payload)
     node.append_transaction(transaction)
-    assert node.get_transaction_by_id(str(transaction.id)) is not None
+    assert node.get_transaction_by_id(transaction['id']) is not None
 
 
 def test_get_transaction_by_id_is_None():

@@ -52,6 +52,7 @@ def post_transaction():
         return '{"message": "Received new transaction ' + str(transaction.id) + ' with payload ' + transaction.payload + \
                ' at ' + str(transaction.timestamp) + '"}'
 
+
 # FIXME implement
 @app.route("/nodes/register", methods=["POST"])
 def register_node ():

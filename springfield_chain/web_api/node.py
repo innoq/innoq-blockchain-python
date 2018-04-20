@@ -37,5 +37,5 @@ class Node:
             if trx['id'] == id:
                 print("woohooo")
                 trans = trx.copy()
-        trans['confirmed'] = True
-        return json.dumps(trans)
+                trans['confirmed'] = True
+        return trans
