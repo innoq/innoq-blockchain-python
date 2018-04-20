@@ -1,5 +1,6 @@
 import uuid
 import json
+import collections
 from springfield_chain.block.chain import BlockChain
 from springfield_chain.block.blocks import block_from_dict
 
@@ -14,6 +15,7 @@ class Node:
         self.chain = BlockChain(genesis)
         self.candidate_txs = []
         self.confirmed_txs = []
+        self.neighbours = []
 
     def append_transaction(self, tx, confirmed=False):
         if not confirmed:
@@ -50,3 +52,13 @@ class Node:
         self.chain.append(block)
         for tx in block.transactions:
             self.confirm_transaction(tx['id'])
+
+    def register_neighbour(self, host):
+        neighbour = Neighbour(host)
+        self.neighbours.append(neighbour)
+        return neighbour
+
+
+class Neighbour(collections.OrderedDict):
+    def __init__(self, host):
+        super().__init__([('id', str(uuid.uuid1())), ('host', host)])

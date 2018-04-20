@@ -16,7 +16,8 @@ node = Node('springfield_chain/block/genesis.json')
 
 @app.route('/')
 def get_node_information():
-    return '{"nodeId": "' + node.uuid + '", "currentBlockHeight": ' + str(len(node.chain)) + '}'
+        return '{"nodeId": "' + node.uuid + '", "currentBlockHeight": ' + str(len(node.chain)) + ', "neighbours": ' + \
+               json.dumps(node.neighbours) + '}'
 
 
 @app.route('/blocks')
@@ -63,7 +64,10 @@ def post_transaction():
     return json.dumps(result)
 
 
-# FIXME implement
 @app.route("/nodes/register", methods=["POST"])
-def register_node():
-    return "dummy registration"
+def register_node ():
+        request_data = request.get_json()
+        host = request_data['host']
+        print(f'host: {host}')
+        neighbour = node.register_neighbour(host)
+        return '{ "message": "New node added","node": ' + json.dumps(neighbour) + '}'
