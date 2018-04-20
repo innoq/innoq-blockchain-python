@@ -33,11 +33,17 @@ class Node:
 
     def get_transaction_by_id(self, id):
         trans = None
-        for trx in self.candidate_txs:
-            if trx['id'] == id:
+        for tx in self.candidate_txs:
+            if tx['id'] == id:
                 print("woohooo")
-                trans = trx.copy()
-                trans['confirmed'] = True
+                trans = tx.copy()
+                trans['confirmed'] = False
+        if trans is None:
+            for tx in self.confirmed_txs:
+                if tx['id'] == id:
+                    print("woohooo confirmed")
+                    trans = tx.copy()
+                    trans['confirmed'] = True
         return trans
 
     def append_block(self, block):

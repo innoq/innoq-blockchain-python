@@ -36,21 +36,21 @@ def get_mine():
 
 @app.route('/transactions/<id>')
 def get_transaction_by_id(id):
-        trx = node.get_transaction_by_id(id)
-        if trx is None:
-                return '{"message": "No transaction found for \'' + id + '\'"}'
+        tx = node.get_transaction_by_id(id)
+        if tx is None:
+                return '{"message": "No transaction found for %s"}' % id
         else:
-                return trx.to_json()
+                return json.dumps(tx)
 
 
 @app.route('/transactions', methods=["POST"])
 def post_transaction():
         request_data = request.get_json()
         payload = request_data['payload']
-        transaction = Transaction(json.dumps(payload, separators=(",", ":")))
-        node.append_transaction(transaction)
-        return '{"message": "Received new transaction ' + str(transaction.id) + ' with payload ' + transaction.payload + \
-               ' at ' + str(transaction.timestamp) + '"}'
+        print(f'payload: {payload}')
+        tx = Transaction(payload)
+        node.append_transaction(tx)
+        return json.dumps(tx)
 
 
 # FIXME implement
