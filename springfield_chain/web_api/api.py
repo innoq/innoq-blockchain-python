@@ -36,7 +36,11 @@ def get_mine():
 
 @app.route('/transactions/<id>')
 def get_transaction_by_id(id):
-        return node.get_transaction_by_id(id)
+        trx = node.get_transaction_by_id(id)
+        if trx is None:
+                return '{"message": "No transaction found for \'' + id + '\'"}'
+        else:
+                return trx.to_json()
 
 
 @app.route('/transactions', methods=["POST"])

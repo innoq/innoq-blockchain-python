@@ -17,11 +17,8 @@ class Node:
     def append_transaction(self, transaction):
         self.transactions.append(transaction)
 
-    def get_transaction_by_id(self, id, trans=None):
+    def get_transaction_by_id(self, id):
         for trx in self.transactions:
-            if trx.id == id:
-                print("woohooo")
-                trans = trx
-        # FIXME
-        return '{ "id": "' + str(trans.id) + '","payload": "' + str(trans.payload) + ',"timestamp": ' \
-               + str(trans.timestamp) + ',"confirmed": true}'
+            if str(trx.id) == id:
+                return trx
+        return None
