@@ -1,14 +1,8 @@
 import time
 import uuid
-import json
+import collections
 
-class Transaction:
+class Transaction(collections.OrderedDict):
 
     def __init__(self, payload):
-        self.id = uuid.uuid1()
-        self.payload = payload
-        self.timestamp = int(time.time())
-        self.confirmed = False
-
-    def to_json(self):
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=False, indent=4)
+        super.__init__([('id', str(uuid.uuid1())), ('timestamp', int(time.time())), ('payload', payload)])

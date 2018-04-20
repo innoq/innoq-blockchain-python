@@ -12,13 +12,30 @@ class Node:
             genesis = block_from_dict(json.loads(in_file.read()))
 
         self.chain = BlockChain(genesis)
-        self.transactions = []
+        self.candidate_txs = []
+        self.confirmed_txs = []
 
-    def append_transaction(self, transaction):
-        self.transactions.append(transaction)
+    def append_transaction(self, tx, confirmed=False):
+        if not confirmed:
+            self.candidate_txs.append(tx)
+        else:
+            self.confirmed_txs.append(tx)
+
+    def confirm_transaction(self, tx_id):
+        """ removes a tx with given id from the candidate list and places it into confirmed tx list """
+        for i in range(len(self.candidate_txs)):
+            tx = self.candidate_txs[i]
+            if tx['id'] == tx_id:
+                self.candidate_txs.pop(i)
+                self.confirmed_txs.append(tx)
+                return tx_id
+        return None
 
     def get_transaction_by_id(self, id):
-        for trx in self.transactions:
-            if str(trx.id) == id:
-                return trx
-        return None
+        trans = None
+        for trx in self.candidate_txs:
+            if trx['id'] == id:
+                print("woohooo")
+                trans = trx.copy()
+        trans['confirmed'] = True
+        return json.dumps(trans)

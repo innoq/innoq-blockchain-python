@@ -24,7 +24,10 @@ class Block:
     def set_proof(self, proof):
         self.proof = proof
 
-    def add_transaction(self, id, timestamp, payload):
+    def add_transaction(self, new_tx):
+        self.transactions.append(new_tx)
+
+    def add_transaction_singleparams(self, id, timestamp, payload):
         new_tx = collections.OrderedDict([('id', id), ('timestamp', timestamp), ('payload', payload)])
         self.transactions.append(new_tx)
 
@@ -52,6 +55,6 @@ def block_from_dict(data):
         return data
     block = Block(data["index"], data["previousBlockHash"], data["timestamp"], data["proof"])
     for tx in data["transactions"]:
-        block.add_transaction(tx["id"], tx["timestamp"], tx["payload"])
+        block.add_transaction_singleparams(tx["id"], tx["timestamp"], tx["payload"])
     return block
 
