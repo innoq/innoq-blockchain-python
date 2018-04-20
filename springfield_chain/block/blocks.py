@@ -6,6 +6,7 @@ import collections
 
 
 ENCODING = "utf-8"
+MAX_TX = 5
 
 class Block:
     """
@@ -24,7 +25,14 @@ class Block:
         self.proof = proof
 
     def add_transaction(self, id, timestamp, payload):
-        self.transactions.append({"id": id, "timestamp" : timestamp, "payload": payload})
+        new_tx = collections.OrderedDict([('id', id), ('timestamp', timestamp), ('payload', payload)])
+        self.transactions.append(new_tx)
+
+    def is_valid(self):
+        if (len(self.transactions) < MAX_TX):
+            return True
+        else:
+            return False
 
     def to_ordered_dict(self):
         dict = collections.OrderedDict()
