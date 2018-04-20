@@ -18,3 +18,4 @@ def create_simple_chain():
         genesis = block_from_dict(json.loads(in_file.read()))
 
     return BlockChain(genesis)
+
