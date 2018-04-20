@@ -39,7 +39,7 @@ def get_mine():
 
 @app.route('/transactions/<id>')
 def get_transaction_by_id(id):
-        return '{ "id": "' + id + '","payload": "Arnulf Beckenbauer","timestamp": 1523525426,"confirmed": true}'
+        return node.get_transaction_by_id(id)
 
 
 # FIXME implement
