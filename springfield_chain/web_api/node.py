@@ -11,4 +11,7 @@ class Node:
             genesis = block_from_dict(json.loads(in_file.read()))
 
         self.chain = BlockChain(genesis)
+        self.transactions = []
 
+    def append_transaction(self, transaction):
+        self.transactions.append(transaction)

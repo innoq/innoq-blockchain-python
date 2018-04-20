@@ -1,6 +1,8 @@
-from flask import Flask
+from flask import Flask, request
 
 import time
+
+from springfield_chain.block.transaction import Transaction
 from springfield_chain.web_api.node import Node
 from springfield_chain.block.blocks import Block
 from springfield_chain.hashing import hash_api
@@ -32,6 +34,15 @@ def get_mine():
         node.chain.append(new_block)
         time_end = time.clock()
         return '{"message": "Mined a new block in ' + str(time_end-time_start) + 's", "block":' + new_block.toJSON() + '}'
+
+# @app.route('/transactions', methods=["POST"])
+# def post_transaction():
+#         print(request.form.get("payload"))
+#         #transaction = Transaction(request.data["payload"])
+#         #print(transaction.payload + " added to transactions")
+#         #node.append_transaction(transaction)
+#         return '{"message": "Received new}'
+
 
 # FIXME implement
 @app.route("/nodes/register", methods=["POST"])
