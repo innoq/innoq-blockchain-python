@@ -1,17 +1,22 @@
-from springfield_chain.block.blocks import block_from_dict
+
 from springfield_chain.hashing import hash_api
-import subprocess
+
+HASH_PREFIX = '0000'
 
 from springfield_chain.block.blocks import Block
 
 def is_proven_hash(hash):
-    return hash.startswith('0000')
+    return hash.startswith(HASH_PREFIX)
 
 def check_block(block):
+    if not block.is_valid():
+        return False
     h = hash_api.hash_block(block)
     return is_proven_hash(h)
 
-def mine_proof(block, proof=0, n=10000000):
+def mine_block(block, proof=0, n=10000000):
+    if not block.is_valid():
+        raise ValueError('this block is not valid')
     for p in range(proof, proof + n):
         h = hash_api.hash_block_with_proof(block, p)
         if is_proven_hash(h):
