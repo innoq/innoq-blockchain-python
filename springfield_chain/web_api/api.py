@@ -58,7 +58,9 @@ def post_transaction():
     print(f'payload: {payload}')
     tx = Transaction(payload)
     node.append_transaction(tx)
-    return json.dumps(tx)
+    result = tx.copy()
+    result['confirmed'] = False
+    return json.dumps(result)
 
 
 # FIXME implement

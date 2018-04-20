@@ -32,7 +32,7 @@ class Block:
         self.transactions.append(new_tx)
 
     def is_valid(self):
-        if (len(self.transactions) < MAX_TX):
+        if len(self.transactions) <= MAX_TX:
             return True
         else:
             return False
