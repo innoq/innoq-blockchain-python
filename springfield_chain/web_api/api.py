@@ -42,6 +42,15 @@ def get_transaction_by_id(id):
         return '{ "id": "' + id + '","payload": "Arnulf Beckenbauer","timestamp": 1523525426,"confirmed": true}'
 
 
+@app.route('/transactions', methods=["POST"])
+def post_transaction():
+        request_data = request.get_json()
+        print(request_data['payload'])
+        transaction = Transaction(request_data['payload'])
+        node.append_transaction(transaction)
+        return '{"message": "Received new transaction ' + str(transaction.id) + ' with payload ' + transaction.payload + \
+               ' at ' + str(transaction.timestamp) + '"}'
+
 # FIXME implement
 @app.route("/nodes/register", methods=["POST"])
 def register_node ():
