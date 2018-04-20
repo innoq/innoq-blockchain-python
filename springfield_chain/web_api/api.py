@@ -7,7 +7,6 @@ import time
 from springfield_chain.block.transaction import Transaction
 from springfield_chain.web_api.node import Node
 
-from springfield_chain.hashing import hash_api
 from springfield_chain.mining import mining
 
 app = Flask(__name__)
